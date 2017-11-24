@@ -53,9 +53,10 @@ def reset_log():
 
 
 def log(msg):
-    print msg
+    formattedMsg = "%s : %s" % (time.asctime(), msg)
+    print formattedMsg
     f = open(log_file(), 'at')
-    f.write("%s : %s\n" % (time.asctime(), msg))
+    f.write(formattedMsg + "\n")
     f.close()
 
 

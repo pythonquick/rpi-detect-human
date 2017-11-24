@@ -4,24 +4,18 @@ import time
 class State:
     def __init__(self, name):
         self.name = name
-        self.timestamp = time.time()
     def __str__(self):
-        return "%.2f : %s" % (self.timestamp, self.name)
-    def inputReceived(self):
-        self.timestamp = time.time()
+        return "%s" % self.name
     def performStateAction(self):
         raise NotImplementedError()
 
 
 class IdleState(State):
     def humanDetected(self):
-        self.inputReceived()
         return HUMAN_DETECTED_STATE
     def nothingDetected(self):
-        self.inputReceived()
         return IDLE_STATE
     def longPeriodPasses(self):
-        self.inputReceived()
         return IDLE_STATE
     def performStateAction(self):
         return None
@@ -29,13 +23,10 @@ class IdleState(State):
 
 class HumanDetectedState(State):
     def humanDetected(self):
-        self.inputReceived()
         return HUMAN_RECENTLY_DETECTED_STATE
     def nothingDetected(self):
-        self.inputReceived()
         return HUMAN_RECENTLY_DETECTED_STATE
     def longPeriodPasses(self):
-        self.inputReceived()
         return HUMAN_RECENTLY_DETECTED_STATE
     def performStateAction(self):
         return "PLAY_SOUND"
@@ -43,13 +34,10 @@ class HumanDetectedState(State):
 
 class HumanRecentlyDetectedState(State):
     def humanDetected(self):
-        self.inputReceived()
         return HUMAN_RECENTLY_DETECTED_STATE
     def nothingDetected(self):
-        self.inputReceived()
         return HUMAN_RECENTLY_DETECTED_STATE
     def longPeriodPasses(self):
-        self.inputReceived()
         return IDLE_STATE
     def performStateAction(self):
         return None
